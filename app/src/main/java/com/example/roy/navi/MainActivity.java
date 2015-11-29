@@ -1,6 +1,7 @@
 package com.example.roy.navi;
 
 import android.content.Context;
+import android.hardware.usb.UsbManager;
 import android.location.LocationManager;
 import android.os.Handler;
 import android.os.Message;
@@ -10,8 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import java.io.UnsupportedEncodingException;
 import java.net.DatagramSocket;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -89,7 +93,14 @@ public class MainActivity extends ActionBarActivity {
 
         m_Timer.schedule(timer_task, 1000l, 1000l);
 
+        //Serial test
+        TextView ReceivedSerialTV = (TextView)findViewById(R.id.received_serial_text);
 
+        UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
+        SerialSender serial_sender = new SerialSender(manager, ReceivedSerialTV);
+        serial_sender.SendData();
+
+        //////////////////
 
         super.onPostCreate(savedInstanceState);
     }
