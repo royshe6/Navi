@@ -112,13 +112,7 @@ public class CarActivity extends ActionBarActivity {
         //m_ReceiveThread = new ReceiveThread(_UdpReceiver, m_DM);
         m_ReceiveThread = new CarReceiveThread(_UdpReceiver,m_SerialSender);
         m_SendThread.start();
-        try
-        {
-            wait(1000);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+
 
         m_SendThread.StartSendingData();
         m_ReceiveThread.start();

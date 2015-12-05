@@ -56,7 +56,7 @@ public class CarSendThread extends Thread
 
         try
         {
-            wait();
+            wait(1000);
         } catch (InterruptedException e)
         {
             e.printStackTrace();
