@@ -14,7 +14,7 @@ import java.net.UnknownHostException;
 /**
  * Created by Roy on 13/11/2015.
  */
-public class SendThread extends Thread
+public class CarSendThread extends Thread
 {
 
     private int m_DestPort;
@@ -24,7 +24,7 @@ public class SendThread extends Thread
     private DisplayManager m_DM;
     private boolean m_IsConnect;
 
-    public SendThread(CommSendInterface a_SendInterface, DisplayManager a_DM)
+    public CarSendThread(CommSendInterface a_SendInterface, DisplayManager a_DM)
     {
         m_SendInterface = a_SendInterface;
         m_CurrentLocation = new Location("Stam");

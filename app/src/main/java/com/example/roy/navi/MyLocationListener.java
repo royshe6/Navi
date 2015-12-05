@@ -10,9 +10,9 @@ import android.os.Bundle;
 public class MyLocationListener implements LocationListener
 {
 
-    private SendThread m_SendThread;
+    private CarSendThread m_SendThread;
 
-    public MyLocationListener(SendThread a_SendThread)
+    public MyLocationListener(CarSendThread a_SendThread)
     {
         m_SendThread = a_SendThread;
     }
