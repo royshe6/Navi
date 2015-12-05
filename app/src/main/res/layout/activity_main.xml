@@ -126,8 +126,18 @@
         android:text="Large Text"
         android:id="@+id/received_serial_text"
         android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="44dp"/>
+        android:layout_alignRight="@+id/sendLatTextView"
+        android:layout_alignEnd="@+id/sendLatTextView"
+        android:layout_marginTop="43dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Serial"
+        android:id="@+id/send_serial"
+        android:layout_alignTop="@+id/received_serial_text"
+        android:layout_alignRight="@+id/button2"
+        android:layout_alignEnd="@+id/button2"
+        android:onClick="SendSerial"/>
 
 </RelativeLayout>
