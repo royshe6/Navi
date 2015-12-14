@@ -9,8 +9,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Timer;
@@ -28,11 +30,26 @@ public class CarActivity extends ActionBarActivity {
     private Handler m_Handler;
     private UsbManager m_UsbManager;
     private SerialSender m_SerialSender;
+    private View.OnTouchListener m_TouchListener;
+    private CarDisplayManager m_CarDM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.car_layout);
+        m_TouchListener = new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                int Action;
+                Action = event.getActionMasked();
+                return false;
+            }
+        };
+        EditText IpAddressText = (EditText)findViewById(R.id.serveraddress);
+        IpAddressText.setOnTouchListener(m_TouchListener);
+
     }
 
     @Override
@@ -66,7 +83,8 @@ public class CarActivity extends ActionBarActivity {
         m_SendThread = new CarSendThread(m_CommSendInterface, m_DM);
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         m_LocListen = new MyLocationListener(m_SendThread);
-
+        m_CarDM = new CarDisplayManager();
+        m_CarDM.UpdateDisplay();
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, m_LocListen);
 
@@ -110,8 +128,9 @@ public class CarActivity extends ActionBarActivity {
         m_SendThread.Init(IpAddressText.getText().toString(), 7001);
         UdpReceiver _UdpReceiver = new UdpReceiver(m_CommSendInterface.GetSocket());
         //m_ReceiveThread = new ReceiveThread(_UdpReceiver, m_DM);
-        m_ReceiveThread = new CarReceiveThread(_UdpReceiver,m_SerialSender);
+        m_ReceiveThread = new CarReceiveThread(_UdpReceiver,m_SerialSender, m_CarDM);
         m_SendThread.start();
+
 
 
         m_SendThread.StartSendingData();

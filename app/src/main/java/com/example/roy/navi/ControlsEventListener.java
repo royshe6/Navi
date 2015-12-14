@@ -3,16 +3,18 @@ package com.example.roy.navi;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.Arrays;
+
 /**
  * Created by Efi on 09/12/2015.
  */
 public class ControlsEventListener implements View.OnTouchListener {
-    //private ControllerSendThread m_SendThread;
+    private ControllerSendThread m_SendThread;
     private byte m_byte_command;
 
-    public ControlsEventListener(/*ControllerSendThread a_SendThread*/)
+    public ControlsEventListener(ControllerSendThread a_SendThread)
     {
-        //m_SendThread = a_SendThread;
+        m_SendThread = a_SendThread;
     }
 
     @Override
@@ -30,91 +32,103 @@ public class ControlsEventListener implements View.OnTouchListener {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     // Forward = bit 2 Set, speed is kept
                     m_byte_command = (byte) ((m_byte_command & (byte) 0xE0) | (byte) 0x04);
-                    return true;
+                    
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
                     m_byte_command = (byte) 0xE0;
-                    return false;
+                    
                 }
-                return false;
+                break;
+                
             case R.id.button_forward_right:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     // Forward Right = bit 0,2 Set, speed is kept
                     m_byte_command = (byte) ((m_byte_command & (byte) 0xE0) | (byte) 0x05);
-                    return true;
+                    
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
                     m_byte_command = (byte) 0xE0;
-                    return false;
+                    
                 }
-                return false;
+                break;
+
             case R.id.button_forward_left:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     // Forward Right = bit 1,2 Set, speed is kept
                     m_byte_command = (byte) ((m_byte_command & (byte) 0xE0) | (byte) 0x06);
-                    return true;
+                    
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
                     m_byte_command = (byte) 0xE0;
-                    return false;
+                    
                 }
-                return false;
+                break;
+
             case R.id.button_right:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     // Forward Right = bit 0 Set, speed is kept
                     m_byte_command = (byte) ((m_byte_command & (byte) 0xE0) | (byte) 0x01);
-                    return true;
+                    
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
                     m_byte_command = (byte) 0xE0;
-                    return false;
+                    
                 }
-                return false;
+                break;
+
             case R.id.button_left:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     // Forward Right = bit 1 Set, speed is kept
                     m_byte_command = (byte) ((m_byte_command & (byte) 0xE0) | (byte) 0x02);
-                    return true;
+                     
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
                     m_byte_command = (byte) 0xE0;
-                    return false;
+                     
                 }
-                return false;
+                break;
+
             case R.id.button_backward:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     // Forward Right = bit 3 Set, speed is kept
                     m_byte_command = (byte) ((m_byte_command & (byte) 0xE0) | (byte) 0x08);
-                    return true;
+                     
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
                     m_byte_command = (byte) 0xE0;
-                    return false;
+                     
                 }
-                return false;
+                break;
+
             case R.id.button_backward_right:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     // Forward Right = bit 0,3 Set, speed is kept
                     m_byte_command = (byte) ((m_byte_command & (byte) 0xE0) | (byte) 0x09);
-                    return true;
+                     
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
                     m_byte_command = (byte) 0xE0;
-                    return false;
+                     
                 }
-                return false;
+                break;
+
             case R.id.button_backward_left:
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     // Forward Right = bit 1,3 Set, speed is kept
                     m_byte_command = (byte)((m_byte_command & (byte)0xE0) | (byte)0x0A);
-                    return true;
+                     
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
                     m_byte_command = (byte) 0xE0;
-                    return false;
+                     
                 }
-                return false;
+                break;
+
         }
-        return false;
+        byte[] ByteToSend = new byte[1];
+        Arrays.fill(ByteToSend, m_byte_command);
+
+        m_SendThread.SetCommandToSend(ByteToSend);
+         return true;
     }
 }

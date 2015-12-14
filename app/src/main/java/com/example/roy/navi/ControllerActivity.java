@@ -1,27 +1,13 @@
 package com.example.roy.navi;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
-import android.view.View.OnClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 
 public class ControllerActivity extends AppCompatActivity {
-
-    private int m_flag;
-    private byte m_byte_command;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +25,12 @@ public class ControllerActivity extends AppCompatActivity {
 //            }
 //        });
 
-        ControlsEventListener EventListener = new ControlsEventListener(/*ControllerSendThread*/);
+        UdpSender udp_sender = new UdpSender();
+
+        ControllerSendThread controller_send_thread = new ControllerSendThread(udp_sender);
+        controller_send_thread.Init ("192.168.1.15",7001);
+        ControlsEventListener EventListener = new ControlsEventListener(controller_send_thread);
+        controller_send_thread.start();
 
         ImageView Forward = (ImageView) findViewById(R.id.button_forward);
         ImageView ForwardRight = (ImageView) findViewById(R.id.button_forward_right);

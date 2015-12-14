@@ -11,6 +11,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <activity
+            android:name=".ControllerActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="com.example.roy.navi.MainActivity">
+        </activity>
+
         <activity
             android:name=".CarActivity"
             android:label="@string/app_name"

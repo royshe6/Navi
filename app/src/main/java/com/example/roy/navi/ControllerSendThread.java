@@ -3,7 +3,7 @@ package com.example.roy.navi;
 /**
  * Created by Roy on 03/12/2015.
  */
-public class ControlerSendThread extends Thread
+public class ControllerSendThread extends Thread
 {
     private byte[] m_CommandToSend;
     private CommSendInterface m_SendInterface;
@@ -11,9 +11,13 @@ public class ControlerSendThread extends Thread
     private String m_DestIpAddress;
 
 
-    public ControlerSendThread(CommSendInterface a_SendInterface)
+    public ControllerSendThread(CommSendInterface a_SendInterface)
     {
         m_SendInterface = a_SendInterface;
+        m_CommandToSend = new byte[]{'0'};
+        int test;
+        test = 1;
+
     }
 
     public void Init(String DestIpAddress, int DestPort)
@@ -31,6 +35,18 @@ public class ControlerSendThread extends Thread
 
     public void run()
     {
+        while(true)
+        {
+            int SentBytes = m_SendInterface.SendData(m_CommandToSend, m_CommandToSend.length);
 
+            try
+            {
+                sleep(1000);
+            }
+            catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 }
