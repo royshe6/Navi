@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+       <declare-styleable name="SevenSeg">
+       <attr name="stam" format="boolean" />
+       <attr name="stam2" format="enum">
+           <enum name="one" value="0"/>
+           <enum name="two" value="1"/>
+       </attr>
+   </declare-styleable>
+</resources>
