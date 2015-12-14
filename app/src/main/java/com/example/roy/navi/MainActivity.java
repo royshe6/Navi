@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity
 
     public void OnControllerButton(View a_View)
     {
-
+        Intent intent = new Intent(this, ControllerActivity.class);
+        startActivity(intent);
     }
 }
