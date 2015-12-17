@@ -1,6 +1,7 @@
 package com.example.roy.navi;
 
 import java.net.DatagramPacket;
+import java.util.Arrays;
 
 /**
  * Created by Roy on 03/12/2015.
@@ -25,12 +26,13 @@ public class CarReceiveThread extends Thread
         {
             DatagramPacket IncomingPacket = m_UdpReceiver.Receive();
             byte[] ReceiveBuf = IncomingPacket.getData();
-            ReceiveBuf.toString();
+            int length = IncomingPacket.getLength();
+            byte[] SendToSerialBuf = Arrays.copyOf(ReceiveBuf,length);
 
-            if(ReceiveBuf.length==1)
+       //     if(SendToSerialBuf.length==1)
             {
                 //Send byte to SerialSender
-                m_SerialSender.SendData(ReceiveBuf);
+                m_SerialSender.SendData(SendToSerialBuf);
             }
         }
 

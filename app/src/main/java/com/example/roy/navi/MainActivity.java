@@ -27,4 +27,10 @@ public class MainActivity extends AppCompatActivity
         Intent intent = new Intent(this, ControllerActivity.class);
         startActivity(intent);
     }
+
+    public void OnMapButton(View a_View)
+    {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
 }

@@ -35,6 +35,8 @@ public class ControllerSendThread extends Thread
 
     public void run()
     {
+        m_SendInterface.Connect();
+
         while(true)
         {
             int SentBytes = m_SendInterface.SendData(m_CommandToSend, m_CommandToSend.length);

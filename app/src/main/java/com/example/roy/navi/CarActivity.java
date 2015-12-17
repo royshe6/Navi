@@ -153,7 +153,15 @@ public class CarActivity extends ActionBarActivity {
     public void SendSerial(View view)
     {
         //Test
-        byte[] TestBuf = {'b','l','a'};
+        byte[] TestBuf = {0x38};
+        m_SerialSender.OpenConnection();
+       m_SerialSender.SendData(TestBuf);
+    }
+
+    public void SendSerial2(View view)
+    {
+        //Test
+        byte[] TestBuf = {0x48};
         m_SerialSender.OpenConnection();
         m_SerialSender.SendData(TestBuf);
     }

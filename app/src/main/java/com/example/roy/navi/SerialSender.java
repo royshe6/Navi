@@ -31,6 +31,7 @@ public class SerialSender
         m_SerialDriver = null;
         m_DeviceConnection = null;
         m_SerialPort = null;
+        m_DeviceConnection = null;
     }
 
     public int OpenConnection()
@@ -39,32 +40,55 @@ public class SerialSender
         //     UsbManager manager = (UsbManager) getSystemService(Context.USB_SERVICE);
         List<UsbSerialDriver> availableDrivers = UsbSerialProber.getDefaultProber().findAllDrivers(m_UsbManager);
         if (availableDrivers.isEmpty()) {
+            m_ReceivedSerialTV.setText("No Drivers");
             return 1;
         }
         else
         {
             m_ReceivedSerialTV.setText("good");
+
         }
 
+
+
+//        try {
+//            this.wait(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         // Open a connection to the first available driver.
-        UsbSerialDriver m_SerialDriver = availableDrivers.get(0);
-        UsbDeviceConnection m_DeviceConnection = m_UsbManager.openDevice(m_SerialDriver.getDevice());
+        m_SerialDriver = availableDrivers.get(0);
+        m_DeviceConnection = m_UsbManager.openDevice(m_SerialDriver.getDevice());
         if (m_DeviceConnection == null)
         {
+            m_ReceivedSerialTV.setText("No Device Connection");
             // You probably need to call UsbManager.requestPermission(driver.getDevice(), ..)
             return 1;
         }
 
         try
         {
+            m_SerialPort = m_SerialDriver.getPorts().get(0);
+            if(m_SerialPort==null)
+            {
+                m_ReceivedSerialTV.setText("SerialPort Not OK");
+                return 1;
+            }
+
+            m_ReceivedSerialTV.setText(m_SerialPort.getClass().toString());
+
             m_SerialPort.open(m_DeviceConnection);
+            m_ReceivedSerialTV.setText("Open");
             //port.setBaudRate(115200);
             m_SerialPort.setParameters(9600, UsbSerialPort.DATABITS_8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE);
+            m_ReceivedSerialTV.setText("SetParams");
+            //m_SerialPort.close();
         }
 
         catch (IOException e)
         {
             // Deal with error.
+            m_ReceivedSerialTV.setText("Exception");
             e.printStackTrace();
             return 1;
         }
@@ -80,7 +104,8 @@ public class SerialSender
         try
         {
 
-            m_SerialPort.write(a_Data,1000);
+            Integer NumWriteBytes = m_SerialPort.write(a_Data,1000);
+//            m_ReceivedSerialTV.setText(NumWriteBytes.toString());
 /////////////////////////////////////LoopbackTest//////////////////////////////////
 //            byte buffer[] = new byte[16];
 //            byte Receivebuffer[] = new byte[16];
@@ -111,17 +136,17 @@ public class SerialSender
             e.printStackTrace();
             return 0;
         }
-        finally
-        {
-            try
-            {
-                m_SerialPort.close();
-            } catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-        m_SerialPort = null;
+//        finally
+//        {
+//            try
+//            {
+//                m_SerialPort.close();
+//            } catch (IOException e)
+//            {
+//                e.printStackTrace();
+//            }
+//        }
+       // m_SerialPort = null;
         return numBytesRead;
     }
 

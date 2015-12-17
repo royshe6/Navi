@@ -28,7 +28,7 @@ public class ControllerActivity extends AppCompatActivity {
         UdpSender udp_sender = new UdpSender();
 
         ControllerSendThread controller_send_thread = new ControllerSendThread(udp_sender);
-        controller_send_thread.Init ("192.168.1.15",7001);
+        controller_send_thread.Init ("192.168.1.7",7001);
         ControlsEventListener EventListener = new ControlsEventListener(controller_send_thread);
         controller_send_thread.start();
 

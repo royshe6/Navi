@@ -127,19 +127,31 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/received_serial_text"
-        android:layout_below="@+id/textView2"
-        android:layout_alignRight="@+id/sendLatTextView"
-        android:layout_alignEnd="@+id/sendLatTextView"
-        android:layout_marginTop="43dp"/>
+        android:layout_below="@+id/SendLonTextView"
+        android:layout_alignBottom="@+id/send_serial"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Send Serial"
         android:id="@+id/send_serial"
-        android:layout_alignTop="@+id/received_serial_text"
-        android:layout_alignRight="@+id/button2"
-        android:layout_alignEnd="@+id/button2"
-        android:onClick="SendSerial"/>
+        android:onClick="SendSerial"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/received_serial_text"
+        android:layout_alignStart="@+id/received_serial_text"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SendSerial 2"
+        android:id="@+id/send_serial2"
+        android:layout_alignTop="@+id/send_serial"
+        android:layout_toRightOf="@+id/sendLatTextView"
+        android:layout_toEndOf="@+id/sendLatTextView"
+        android:onClick="SendSerial2"/>
 
 </RelativeLayout>
