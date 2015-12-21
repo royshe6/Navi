@@ -169,4 +169,25 @@ public class SerialSender
         return 0;
     }
 
+    public byte[] ReadFeedback()
+    {
+        byte[] ReadBuf = new byte[256];
+        byte[] ReadBufTrimmed = null;
+        int NumReadBytes = 0;
+        if(m_SerialPort==null)
+            return null;
+        else
+        {
+            try {
+                NumReadBytes = m_SerialPort.read(ReadBuf,1000);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(NumReadBytes>0)
+        {
+            ReadBufTrimmed = Arrays.copyOf(ReadBuf,NumReadBytes);
+        }
+        return ReadBufTrimmed;
+    }
 }

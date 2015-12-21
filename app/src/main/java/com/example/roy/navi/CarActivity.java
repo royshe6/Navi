@@ -78,13 +78,18 @@ public class CarActivity extends ActionBarActivity {
 
     protected void onPostCreate(Bundle savedInstanceState)
     {
-        m_DM = new DisplayManager(findViewById(R.id.sendLatTextView),findViewById(R.id.SendLonTextView),findViewById(R.id.ReceivedLatTextView),findViewById(R.id.ReceivedLonTextView));
+        //m_DM = new DisplayManager(findViewById(R.id.sendLatTextView),findViewById(R.id.SendLonTextView),findViewById(R.id.ReceivedLatTextView),findViewById(R.id.ReceivedLonTextView));
+
+        m_CarDM = new CarDisplayManager(this.getApplicationContext(),(ImageView)findViewById(R.id.imageView),
+                (TextView)findViewById(R.id.sendLatTextView), (TextView)findViewById(R.id.SendLonTextView),
+                (TextView)findViewById(R.id.throttle_tv),(TextView)findViewById(R.id.received_serial_text));
+
         m_CommSendInterface = new UdpSender();
-        m_SendThread = new CarSendThread(m_CommSendInterface, m_DM);
+        m_SendThread = new CarSendThread(m_CommSendInterface, m_CarDM);
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         m_LocListen = new MyLocationListener(m_SendThread);
-        m_CarDM = new CarDisplayManager();
-        m_CarDM.UpdateDisplay();
+
+
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, m_LocListen);
 
@@ -103,7 +108,7 @@ public class CarActivity extends ActionBarActivity {
         m_Handler = new Handler() {
             public void handleMessage(Message msg)
             {
-                m_DM.UpdateDisplay();
+                m_CarDM.UpdateDisplay();
             }
         };
 

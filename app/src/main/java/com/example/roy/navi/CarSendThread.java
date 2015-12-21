@@ -21,10 +21,10 @@ public class CarSendThread extends Thread
     private String m_DestIpAddress;
     private CommSendInterface m_SendInterface;
     private Location m_CurrentLocation;
-    private DisplayManager m_DM;
+    private CarDisplayManager m_DM;
     private boolean m_IsConnect;
 
-    public CarSendThread(CommSendInterface a_SendInterface, DisplayManager a_DM)
+    public CarSendThread(CommSendInterface a_SendInterface, CarDisplayManager a_DM)
     {
         m_SendInterface = a_SendInterface;
         m_CurrentLocation = new Location("Stam");
@@ -92,7 +92,7 @@ public class CarSendThread extends Thread
             Data = baos.toByteArray();
 
             //Updtae SendDisplay
-            m_DM.UpdateSentDataDisplay(Lat,Lon);
+            m_DM.SetLonLatValue(Lat,Lon);
 
             //Send Datagram via interface
             m_SendInterface.SendData(Data,Data.length);

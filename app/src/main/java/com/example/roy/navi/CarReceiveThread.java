@@ -29,10 +29,20 @@ public class CarReceiveThread extends Thread
             int length = IncomingPacket.getLength();
             byte[] SendToSerialBuf = Arrays.copyOf(ReceiveBuf,length);
 
+
+            m_CarDM.UpdateCommandValue(SendToSerialBuf);
+
        //     if(SendToSerialBuf.length==1)
             {
                 //Send byte to SerialSender
                 m_SerialSender.SendData(SendToSerialBuf);
+               byte[] ReadFeedback =  m_SerialSender.ReadFeedback();
+               if(ReadFeedback!=null)
+               {
+
+
+                   m_CarDM.SetReceivedSerial(ReadFeedback);
+               }
             }
         }
 

@@ -49,12 +49,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="V01.01"
+        android:text="V01.02"
         android:id="@+id/textView4"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="#2f2a65"/>
+        android:textColor="#2f2a65"
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:layout_width="wrap_content"
