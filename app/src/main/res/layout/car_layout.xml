@@ -15,7 +15,7 @@
         android:hint="Server IP"
         android:enabled="true"
         android:singleLine="true"
-        android:text="79.176.174.145"
+        android:text="192.168.1.7"
         android:editable="true"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ReceivedLatTextView"

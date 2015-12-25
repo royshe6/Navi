@@ -11,10 +11,12 @@ import java.util.Arrays;
 public class ControlsEventListener implements View.OnTouchListener {
     private ControllerSendThread m_SendThread;
     private byte m_byte_command;
+    private byte m_DefaultSpeed;
 
     public ControlsEventListener(ControllerSendThread a_SendThread)
     {
         m_SendThread = a_SendThread;
+        m_DefaultSpeed = (byte)0xE0;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class ControlsEventListener implements View.OnTouchListener {
                     
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
-                    m_byte_command = (byte) 0xE0;
+                    m_byte_command = (byte) m_DefaultSpeed;
                     
                 }
                 break;
@@ -47,7 +49,7 @@ public class ControlsEventListener implements View.OnTouchListener {
                     
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
-                    m_byte_command = (byte) 0xE0;
+                    m_byte_command = (byte) m_DefaultSpeed;
                     
                 }
                 break;
@@ -59,7 +61,7 @@ public class ControlsEventListener implements View.OnTouchListener {
                     
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
-                    m_byte_command = (byte) 0xE0;
+                    m_byte_command = (byte) m_DefaultSpeed;
                     
                 }
                 break;
@@ -71,7 +73,7 @@ public class ControlsEventListener implements View.OnTouchListener {
                     
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
-                    m_byte_command = (byte) 0xE0;
+                    m_byte_command = (byte) m_DefaultSpeed;
                     
                 }
                 break;
@@ -83,7 +85,7 @@ public class ControlsEventListener implements View.OnTouchListener {
                      
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
-                    m_byte_command = (byte) 0xE0;
+                    m_byte_command = (byte) m_DefaultSpeed;
                      
                 }
                 break;
@@ -95,7 +97,7 @@ public class ControlsEventListener implements View.OnTouchListener {
                      
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
-                    m_byte_command = (byte) 0xE0;
+                    m_byte_command = (byte) m_DefaultSpeed;
                      
                 }
                 break;
@@ -107,7 +109,7 @@ public class ControlsEventListener implements View.OnTouchListener {
                      
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
-                    m_byte_command = (byte) 0xE0;
+                    m_byte_command = (byte) m_DefaultSpeed;
                      
                 }
                 break;
@@ -119,8 +121,8 @@ public class ControlsEventListener implements View.OnTouchListener {
                      
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // Only speed is kept
-                    m_byte_command = (byte) 0xE0;
-                     
+                    m_byte_command = (byte) m_DefaultSpeed;
+
                 }
                 break;
 
